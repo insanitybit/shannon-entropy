@@ -1,0 +1,16 @@
+[package]
+name = "shannon-entropy"
+version = "0.1.0"
+authors = ["insanitybit <insanitybit@gmail.com>"]
+description = "A simple library to calculate the Shannon entropy of a string"
+license = "MIT OR Apache-2.0"
+keywords = ["shannon", "entropy"]
+
+[dependencies]
+rand = "0.3.*"
+
+[profile.bench]
+opt-level = 3
+debug = false
+rpath = false
+debug-assertions = false
