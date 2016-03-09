@@ -20,38 +20,30 @@ pub fn shannon_entropy(s: &str) -> f32 {
     let mut ascii_map: [usize; 128] = [0;128];
 
     for ch in s.chars() {
-
         if ch.is_ascii() {
             ascii_map[ch as usize] += 1;
         } else {
             *char_map.entry(ch).or_insert(0) += 1;
         }
-
     }
     let s_len = (s.len() as f32).round();
-
-    let mut result = 0.0;
     let log_div = (2.0 as f32).ln();
 
-    for value in char_map.values() {
-        let value = *value;
-        if value == 0 {
-            continue;
+    let result = char_map.values().fold(0.0, |acc, c| {
+        if * c == 0 {
+            acc + 0.0
+        } else {
+            acc + (*c as f32 * (*c as f32 / s_len).ln())/(s_len * log_div)
         }
-        let frequency: f32 = value as f32 / s_len;
-        result -= frequency * (frequency.ln() / log_div);
-    }
+    });
 
-    for value in ascii_map.into_iter() {
-        let value = *value;
-        if value == 0 {
-            continue;
+    ascii_map.into_iter().fold(result, |acc, c| {
+        if * c == 0 {
+            acc + 0.0
+        } else {
+            acc + (*c as f32 * (*c as f32 / s_len).ln())/(s_len * log_div)
         }
-        let frequency: f32 = value as f32 / s_len;
-        result -= frequency * (frequency.ln() / log_div);
-    }
-
-    return result.abs()
+    }).abs()
 }
 
 #[cfg(test)]
