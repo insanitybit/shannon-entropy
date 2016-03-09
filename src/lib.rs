@@ -65,6 +65,8 @@ mod tests {
     fn test_shannon() {
 
         let test_strings = vec![
+                                // Make sure we're consistent
+                                ("horse staple battery", shannon_entropy("horse staple battery")),
                                 // All-ASCII strings hit the fast path
                                 ("hello world", 2.845351),
                                 ("hello worldd", 2.8553884),
