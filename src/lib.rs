@@ -1,10 +1,32 @@
 #![feature(test)]
 use std::collections::BTreeMap;
+use std::ascii::AsciiExt;
+/// Calculates the shannon entropy of 's'.
+/// https://en.wiktionary.org/wiki/Shannon_entropy
+///
+/// # Arguments
+///
+/// * `s` - The string slice to calculate entropy for
+///
+/// # Example
+/// let entropy : f32 = shannon_entropy("Hi there!");
 
 pub fn shannon_entropy(s: &str) -> f32 {
+    if s.is_empty() {
+        return 0.0
+    }
     let mut char_map : BTreeMap<char, usize> = BTreeMap::new();
+
+    let mut ascii_map: [usize; 128] = [0;128];
+
     for ch in s.chars() {
-        *char_map.entry(ch).or_insert(0) += 1;
+
+        if ch.is_ascii() {
+            ascii_map[ch as usize] += 1;
+        } else {
+            *char_map.entry(ch).or_insert(0) += 1;
+        }
+
     }
     let s_len = (s.len() as f32).round();
 
@@ -12,9 +34,23 @@ pub fn shannon_entropy(s: &str) -> f32 {
     let log_div = (2.0 as f32).ln();
 
     for value in char_map.values() {
-        let frequency: f32 = *value as f32 / s_len;
+        let value = *value;
+        if value == 0 {
+            continue;
+        }
+        let frequency: f32 = value as f32 / s_len;
         result -= frequency * (frequency.ln() / log_div);
     }
+
+    for value in ascii_map.into_iter() {
+        let value = *value;
+        if value == 0 {
+            continue;
+        }
+        let frequency: f32 = value as f32 / s_len;
+        result -= frequency * (frequency.ln() / log_div);
+    }
+
     return result.abs()
 }
 
