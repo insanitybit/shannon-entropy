@@ -1,4 +1,4 @@
-#![feature(test)]
+// #![feature(test)]
 use std::collections::BTreeMap;
 use std::ascii::AsciiExt;
 
@@ -54,11 +54,11 @@ pub fn shannon_entropy(s: &str) -> f32 {
 
 #[cfg(test)]
 mod tests {
-    extern crate test;
+    // extern crate test;
     extern crate rand;
 
     use super::*;
-    use self::test::Bencher;
+    // use self::test::Bencher;
     use self::rand::{thread_rng, Rng};
 
     #[test]
@@ -85,26 +85,26 @@ mod tests {
 
     }
 
-    #[bench]
-    fn bench_shannon_empty(b: &mut Bencher) {
-        b.iter(|| shannon_entropy(""));
-    }
-
-    #[bench]
-    fn bench_shannon_small(b: &mut Bencher) {
-        let s: String = thread_rng().gen_ascii_chars().take(64).collect();
-        b.iter(|| shannon_entropy(&s));
-    }
-
-    #[bench]
-    fn bench_shannon_medium(b: &mut Bencher) {
-        let s: String = thread_rng().gen_ascii_chars().take(1024).collect();
-        b.iter(|| shannon_entropy(&s));
-    }
-
-    #[bench]
-    fn bench_shannon_large(b: &mut Bencher) {
-        let s: String = thread_rng().gen_ascii_chars().take(65536).collect();
-        b.iter(|| shannon_entropy(&s));
-    }
+    // #[bench]
+    // fn bench_shannon_empty(b: &mut Bencher) {
+    //     b.iter(|| shannon_entropy(""));
+    // }
+    //
+    // #[bench]
+    // fn bench_shannon_small(b: &mut Bencher) {
+    //     let s: String = thread_rng().gen_ascii_chars().take(64).collect();
+    //     b.iter(|| shannon_entropy(&s));
+    // }
+    //
+    // #[bench]
+    // fn bench_shannon_medium(b: &mut Bencher) {
+    //     let s: String = thread_rng().gen_ascii_chars().take(1024).collect();
+    //     b.iter(|| shannon_entropy(&s));
+    // }
+    //
+    // #[bench]
+    // fn bench_shannon_large(b: &mut Bencher) {
+    //     let s: String = thread_rng().gen_ascii_chars().take(65536).collect();
+    //     b.iter(|| shannon_entropy(&s));
+    // }
 }
