@@ -1,0 +1,30 @@
+Initial implementation:
+
+test tests::bench_shannon_empty  ... bench:          41 ns/iter (+/- 2)
+test tests::bench_shannon_small  ... bench:       1,987 ns/iter (+/- 286)
+test tests::bench_shannon_medium ... bench:      18,929 ns/iter (+/- 1,521)
+test tests::bench_shannon_large  ... bench:   1,722,247 ns/iter (+/- 80,680)
+
+
+Add Fast path:
+
+test tests::bench_shannon_empty  ... bench:         104 ns/iter (+/- 6)
+test tests::bench_shannon_small  ... bench:         887 ns/iter (+/- 142)
+test tests::bench_shannon_medium ... bench:       3,162 ns/iter (+/- 289)
+test tests::bench_shannon_large  ... bench:      61,455 ns/iter (+/- 1,664)
+
+
+Return early on empty string. Switch to fold instead of loop.
+
+test tests::bench_shannon_empty  ... bench:           0 ns/iter (+/- 0)
+test tests::bench_shannon_small  ... bench:         565 ns/iter (+/- 86)
+test tests::bench_shannon_medium ... bench:       1,987 ns/iter (+/- 207)
+test tests::bench_shannon_large  ... bench:      61,748 ns/iter (+/- 1,949)
+
+
+Move division out of loop.
+
+test tests::bench_shannon_empty  ... bench:           0 ns/iter (+/- 0)
+test tests::bench_shannon_small  ... bench:         626 ns/iter (+/- 134)
+test tests::bench_shannon_medium ... bench:       2,821 ns/iter (+/- 196)
+test tests::bench_shannon_large  ... bench:      61,454 ns/iter (+/- 2,248)

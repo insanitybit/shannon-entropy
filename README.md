@@ -8,7 +8,7 @@ Add this to your Cargo.toml
 
 ```toml
 [dependencies]
-shannon-entropy = "0.1"
+shannon-entropy = "0.2"
 ```
 
 # Example
