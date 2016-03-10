@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/insanitybit/shannon-entropy.png)](https://travis-ci.org/insanitybit/shannon-entropy)
+[![](https://meritbadge.herokuapp.com/gsbrs)](https://crates.io/crates/gsbrs)
+[![Coverage Status](https://coveralls.io/repos/insanitybit/shannon-entropy/badge.svg?branch=master&service=github)](https://coveralls.io/github/insanitybit/shannon-entropy?branch=master)
+
 # shannon-entropy
 A rust library to calculate the Shannon entropy of a string.
 
