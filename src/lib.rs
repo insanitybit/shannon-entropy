@@ -52,6 +52,7 @@ pub fn shannon_entropy(s: &str) -> f32 {
     result
 }
 
+
 #[cfg(test)]
 mod tests {
     // extern crate test;
@@ -65,25 +66,25 @@ mod tests {
     fn test_shannon() {
 
         let test_strings = vec![
-                                // Make sure we're consistent
-                                ("horse staple battery", shannon_entropy("horse staple battery")),
-                                // All-ASCII strings hit the fast path
-                                ("hello world", 2.845351),
-                                ("hello worldd", 2.8553884),
-                                ("a", 0.0),
-                                ("", 0.0),
-                                // // Test non-ascii characters for slow path
-                                ("i ❤ rust", 2.7499998),
-                                ("ßℝ💣", 1.5849625),
-                                ("abc", 1.5849625),
-                                ("hello world💣", 3.0220554),
-                                ];
+                            // Make sure we're consistent
+                            ("horse staple battery", shannon_entropy("horse staple battery")),
+                            // All-ASCII strings hit the fast path
+                            ("hello world", 2.845351),
+                            ("hello worldd", 2.8553884),
+                            ("a", 0.0),
+                            ("", 0.0),
+                            // // Test non-ascii characters for slow path
+                            ("i ❤ rust", 2.7499998),
+                            ("ßℝ💣", 1.5849625),
+                            ("abc", 1.5849625),
+                            ("hello world💣", 3.0220554),
+                            ];
         for (test, answer) in test_strings {
             let entropy = shannon_entropy(test);
             assert_eq!(entropy, answer);
         }
-
     }
+}
 
     // #[bench]
     // fn bench_shannon_empty(b: &mut Bencher) {
@@ -107,4 +108,3 @@ mod tests {
     //     let s: String = thread_rng().gen_ascii_chars().take(65536).collect();
     //     b.iter(|| shannon_entropy(&s));
     // }
-}
