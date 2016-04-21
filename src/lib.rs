@@ -16,10 +16,9 @@ pub fn shannon_entropy(s: &str) -> f32 {
     if s.is_empty() {
         return 0.0
     }
-    let mut char_map : BTreeMap<char, usize> = BTreeMap::new();
-
-    let mut ascii_map: [usize; 128] = [0;128];
-
+    
+    let mut char_map: BTreeMap<char, usize> = BTreeMap::new();
+    let mut ascii_map: [usize; 128] = [0; 128];
     let mut s_len = 0;
 
     for ch in s.chars() {
@@ -34,23 +33,13 @@ pub fn shannon_entropy(s: &str) -> f32 {
     let s_len = (s_len as f32).round();
     let log_div = (2.0 as f32).ln();
 
-    let result = char_map.values().fold(0.0, |acc, c| {
-        if * c == 0 {
-            acc
-        } else {
-            acc + (*c as f32 * (*c as f32 / s_len).ln())
-        }
-    });
+    let result = char_map.values().chain(ascii_map.into_iter())
+        .fold(0.0, |acc, &c| match c {
+            0 => acc,
+            c => acc + (c as f32 * (c as f32 / s_len).ln())
+        }).abs();
 
-    let result = ascii_map.into_iter().fold(result, |acc, c| {
-        if * c == 0 {
-            acc
-        } else {
-            acc + (*c as f32 * (*c as f32 / s_len).ln())
-        }
-    }).abs();
-    let result = result / (s_len * log_div);
-    result
+    result / (s_len * log_div)
 }
 
 
