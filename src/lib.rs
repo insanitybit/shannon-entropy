@@ -8,8 +8,10 @@ use std::collections::BTreeMap;
 ///
 /// * `s` - The string slice to calculate entropy for
 ///
-/// # Example
-/// let entropy : f32 = shannon_entropy("Hi there!");
+/// # Examples
+/// ```
+/// let entropy: f32 = shannon_entropy::shannon_entropy("Hi there!");
+/// ```
 pub fn shannon_entropy(s: &str) -> f32 {
     if s.is_empty() {
         return 0.0
