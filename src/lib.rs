@@ -63,13 +63,13 @@ pub fn shannon_entropy(s: &str) -> f32 {
 
 #[cfg(test)]
 mod tests {
-    use super::shannon_entropy;
+    use super::ShannonEntropy;
 
     #[test]
     fn test_shannon() {
         let test_strings = vec![
             // Make sure we're consistent
-            ("horse staple battery", shannon_entropy("horse staple battery")),
+            ("horse staple battery", "horse staple battery".entropy()),
             // All-ASCII strings hit the fast path
             ("hello world", 2.845351),
             ("hello worldd", 2.8553884),
@@ -83,8 +83,7 @@ mod tests {
         ];
         
         for (test, answer) in test_strings {
-            let entropy = shannon_entropy(test);
-            assert_eq!(entropy, answer);
+            assert_eq!(answer, test.entropy());
         }
     }
 }
