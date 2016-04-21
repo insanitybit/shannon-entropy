@@ -1,6 +1,16 @@
 use std::ascii::AsciiExt;
 use std::collections::BTreeMap;
 
+pub trait ShannonEntropy {
+    fn entropy(&self) -> f32;
+}
+
+impl<T: AsRef<str>> ShannonEntropy for T {
+    fn entropy(&self) -> f32 {
+        shannon_entropy(self.as_ref())
+    }
+} 
+
 /// Calculates the shannon entropy of 's'.
 /// https://en.wiktionary.org/wiki/Shannon_entropy
 ///
@@ -9,8 +19,16 @@ use std::collections::BTreeMap;
 /// * `s` - The string slice to calculate entropy for
 ///
 /// # Examples
+/// It's possible to call the function directly, as in the following example:
 /// ```
 /// let entropy: f32 = shannon_entropy::shannon_entropy("Hi there!");
+/// ```
+///
+/// Alternatively, it is possible to import the `ShannonEntropy` trait and call
+/// the function as if it were a method:
+/// ```
+/// use shannon_entropy::ShannonEntropy;
+/// let entropy = "Hi, there!".entropy();
 /// ```
 pub fn shannon_entropy(s: &str) -> f32 {
     if s.is_empty() {
