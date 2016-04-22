@@ -9,9 +9,6 @@ keywords = ["shannon", "entropy"]
 repository = "https://github.com/insanitybit/shannon-entropy"
 readme = "README.md"
 
-[dependencies]
-rand = "0.3.*"
-
 [profile.bench]
 opt-level = 3
 debug = false
