@@ -1,4 +1,3 @@
-use std::ascii::AsciiExt;
 use std::collections::BTreeMap;
 
 pub trait ShannonEntropy {
@@ -51,7 +50,7 @@ pub fn shannon_entropy(s: &str) -> f32 {
     let s_len = (s_len as f32).round();
     let log_div = (2.0 as f32).ln();
 
-    let result = char_map.values().chain(ascii_map.into_iter())
+    let result = char_map.values().chain(ascii_map.iter())
         .fold(0.0, |acc, &c| match c {
             0 => acc,
             c => acc + (c as f32 * (c as f32 / s_len).ln())
